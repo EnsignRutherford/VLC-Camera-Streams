@@ -25,7 +25,7 @@ setup mosaic_ch4 output #mosaic-bridge{id=mosaic_ch4,width=480,height=270}
 new mosaic_bg broadcast enabled
 setup mosaic_bg input "C:\Windows\bg_1280x720.jpg"
 setup mosaic_bg option image-duration=-1
-setup mosaic_bg output #transcode{vcodec=MJPG,vb=0,scale=Auto,acodec=none,scodec=nonechannels=2,sfilter=mosaic{alpha=255,width=960,height=540,cols=2,rows=2,position=1,order="mosaic_ch1,mosaic_ch2,mosaic_ch3,mosaic_ch4",keep-aspect-ratio=enabled,mosaic-align=0,keep-picture=1}}:bridge-in{offset=100}:standard{access=http{mime="multipart/x-mixed-replace; boundary=--7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8880/video.mjpg,sap,name=Mosaic,ttl=10}}
+setup mosaic_bg output #transcode{vcodec=MJPG,vb=0,scale=Auto,acodec=none,scodec=none,channels=2,sfilter=mosaic{alpha=255,width=960,height=540,cols=2,rows=2,position=1,order="mosaic_ch1,mosaic_ch2,mosaic_ch3,mosaic_ch4",keep-aspect-ratio=enabled,mosaic-align=0,keep-picture=1}}:bridge-in{offset=100}:standard{access=http{mime="multipart/x-mixed-replace; boundary=--7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8880/video.mjpg,sap,name=Mosaic,ttl=10}}
 
 #
 # Start the mosaic MJPEG feed over HTTP

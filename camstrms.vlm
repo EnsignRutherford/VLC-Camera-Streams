@@ -1,0 +1,64 @@
+889165#
+# Comment the following line if you don't want to reset your VLM configuration
+#
+del all
+
+#
+# Create the four mosaic broadcasts and the background jpg
+#
+new mosaic_ch1 broadcast enabled
+setup mosaic_ch1 input "rtsp://user:pass@XXX.XXX.XXX.XXX:554/video.mjpeg?channel=1"
+setup mosaic_ch1 output #mosaic-bridge{mosaic_ch1,width=480,height=270}
+
+new mosaic_ch2 broadcast enabled
+setup mosaic_ch2 input "rtsp://user:pass@XXX.XXX.XXX.XXX:554/video.mjpeg?channel=2"
+setup mosaic_ch2 output #mosaic-bridge{id=mosaic_ch2,width=480,height=270}
+
+new mosaic_ch3 broadcast enabled
+setup mosaic_ch3 input "rtsp://user:pass@XXX.XXX.XXX.XXX:554/video.mjpeg?channel=3"
+setup mosaic_ch3 output #mosaic-bridge{id=mosaic_ch3,width=480,height=270}
+
+new mosaic_ch4 broadcast enabled
+setup mosaic_ch4 input "rtsp://user:pass@XXX.XXX.XXX.XXX:554/video.mjpeg?channel=4"
+setup mosaic_ch4 output #mosaic-bridge{id=mosaic_ch4,width=480,height=270}
+
+new mosaic_bg broadcast enabled
+setup mosaic_bg input "C:\Windows\bg_1280x720.jpg"
+setup mosaic_bg option image-duration=-1
+setup mosaic_bg output #transcode{vcodec=MJPG,vb=0,scale=Auto,acodec=none,scodec=nonechannels=2,sfilter=mosaic{alpha=255,width=960,height=540,cols=2,rows=2,position=1,order="mosaic_ch1,mosaic_ch2,mosaic_ch3,mosaic_ch4",keep-aspect-ratio=enabled,mosaic-align=0,keep-picture=1}}:bridge-in{offset=100}:standard{access=http{mime="multipart/x-mixed-replace; boundary=--7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8880/video.mjpg,sap,name=Mosaic,ttl=10}}
+
+#
+# Start the mosaic MJPEG feed over HTTP
+#
+control mosaic_bg play
+control mosaic_ch1 play
+control mosaic_ch2 play
+control mosaic_ch3 play
+control mosaic_ch4 play
+
+#
+# Create the four individual camera broadcasts
+#
+new camera1 broadcast enabled
+setup camera1 input "rtsp://user:pass@XXX.XXX.XXX.XXX:554/video.mjpeg?channel=1"
+setup camera1 output #transcode{vcodec=mjpg,vb=0,scale=Auto,width=640,height=360,fps=5,acodec=none}:standard{access=http{mime="multipart/x-mixed-replace;boundary=7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8881/video.mjpg}
+
+new camera2 broadcast enabled
+setup camera2 input "rtsp://user:pass@XXX.XXX.XXX.XXX:554/video.mjpeg?channel=2"
+setup camera2 output #transcode{vcodec=mjpg,vb=1000,scale=Auto,width=640,height=360,fps=5,acodec=none}:standard{access=http{mime="multipart/x-mixed-replace;boundary=7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8882/video.mjpg}
+
+new camera3 broadcast enabled
+setup camera3 input "rtsp://user:pass@XXX.XXX.XXX.XXX:554/video.mjpeg?channel=3"
+setup camera3 output #transcode{vcodec=mjpg,vb=1000,scale=Auto,width=640,height=360,fps=5,acodec=none}:standard{access=http{mime="multipart/x-mixed-replace;boundary=7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8883/video.mjpg}
+
+new camera4 broadcast enabled
+setup camera4 input "rtsp://user:pass@XXX.XXX.XXX.XXX:554/video.mjpeg?channel=4"
+setup camera4 output #transcode{vcodec=mjpg,vb=1000,scale=Auto,width=640,height=360,fps=5,acodec=none}:standard{access=http{mime="multipart/x-mixed-replace;boundary=7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8884/video.mjpg}
+
+#
+# Start the individual camera MJPEG feeds over HTTP
+#
+control camera1 play
+control camera2 play
+control camera3 play
+control camera4 play

@@ -8,19 +8,19 @@ del all
 #
 new mosaic_ch1 broadcast enabled
 setup mosaic_ch1 input "rtsp://user:pass@XXX.XXX.XXX.XXX:554/video.mjpeg?channel=1"
-setup mosaic_ch1 output #transcode{vcodec=mjpg,vb=0,scale=Auto,width=480,height=270,fps=5,acodec=none}:duplicate{dst=standard{access=http{mime="multipart/x-mixed-replace;boundary=7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8881/video.mjpg},dst=mosaic-bridge{mosaic_ch1,width=480,height=270}}
+setup mosaic_ch1 output #transcode{vcodec=mjpg,vb=0,scale=Auto,width=480,height=270,fps=5,acodec=none}:duplicate{dst=standard{access=http{mime="multipart/x-mixed-replace;boundary=7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8881/video.mjpg},dst=mosaic-bridge{id=mosaic_ch1,width=480,height=270}}
 
 new mosaic_ch2 broadcast enabled
 setup mosaic_ch2 input "rtsp://user:pass@XXX.XXX.XXX.XXX:554/video.mjpeg?channel=2"
-setup mosaic_ch2 output #transcode{vcodec=mjpg,vb=0,scale=Auto,width=480,height=270,fps=5,acodec=none}:duplicate{dst=standard{access=http{mime="multipart/x-mixed-replace;boundary=7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8882/video.mjpg},dst=mosaic-bridge{mosaic_ch2,width=480,height=270}}
+setup mosaic_ch2 output #transcode{vcodec=mjpg,vb=0,scale=Auto,width=480,height=270,fps=5,acodec=none}:duplicate{dst=standard{access=http{mime="multipart/x-mixed-replace;boundary=7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8882/video.mjpg},dst=mosaic-bridge{id=mosaic_ch2,width=480,height=270}}
 
 new mosaic_ch3 broadcast enabled
 setup mosaic_ch3 input "rtsp://user:pass@XXX.XXX.XXX.XXX:554/video.mjpeg?channel=3"
-setup mosaic_ch3 output #transcode{vcodec=mjpg,vb=0,scale=Auto,width=480,height=270,fps=5,acodec=none}:duplicate{dst=standard{access=http{mime="multipart/x-mixed-replace;boundary=7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8883/video.mjpg},dst=mosaic-bridge{mosaic_ch3,width=480,height=270}}
+setup mosaic_ch3 output #transcode{vcodec=mjpg,vb=0,scale=Auto,width=480,height=270,fps=5,acodec=none}:duplicate{dst=standard{access=http{mime="multipart/x-mixed-replace;boundary=7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8883/video.mjpg},dst=mosaic-bridge{id=mosaic_ch3,width=480,height=270}}
 
 new mosaic_ch4 broadcast enabled
 setup mosaic_ch4 input "rtsp://user:pass@XXX.XXX.XXX.XXX:554/video.mjpeg?channel=4"
-setup mosaic_ch4 output #transcode{vcodec=mjpg,vb=0,scale=Auto,width=480,height=270,fps=5,acodec=none}:duplicate{dst=standard{access=http{mime="multipart/x-mixed-replace;boundary=7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8884/video.mjpg},dst=mosaic-bridge{mosaic_ch4,width=480,height=270}}
+setup mosaic_ch4 output #transcode{vcodec=mjpg,vb=0,scale=Auto,width=480,height=270,fps=5,acodec=none}:duplicate{dst=standard{access=http{mime="multipart/x-mixed-replace;boundary=7b3cc56e5f51db803f790dad720ed50a"},mux=mpjpeg,dst=:8884/video.mjpg},dst=mosaic-bridge{id=mosaic_ch4,width=480,height=270}}
 
 new mosaic_bg broadcast enabled
 setup mosaic_bg input "C:\Windows\bg_1280x720.jpg"
